@@ -204,6 +204,7 @@
             border: 2px solid transparent;
             font-family: 'ZCOOL XiaoWei', serif;
             font-weight: 600;
+            z-index: 1000;
         }
 
         .data-highlight::before {
@@ -231,18 +232,18 @@
 
         .data-highlight .detail-card {
             position: absolute;
-            top: 100%;
+            top: calc(100% + 8px);
             left: 50%;
             transform: translateX(-50%) translateY(10px);
             background: var(--white);
-            padding: 20px 24px;
+            padding: 0;
             border-radius: 12px;
             box-shadow: 0 8px 32px var(--shadow-strong);
             width: 280px;
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
-            z-index: 100;
+            z-index: 1000;
             font-size: 14px;
             line-height: 1.6;
             text-align: left;
@@ -257,6 +258,16 @@
             left: 50%;
             transform: translateX(-50%);
             border: 8px solid transparent;
+            border-bottom-color: var(--primary);
+        }
+
+        .data-highlight .detail-card::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
             border-bottom-color: var(--white);
         }
 
@@ -267,12 +278,53 @@
             pointer-events: auto;
         }
 
-        .data-highlight .detail-card::after {
-            content: '🏃';
-            position: absolute;
-            top: -20px;
-            right: 10px;
-            font-size: 16px;
+        .detail-card-header {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(91, 125, 177, 0.1);
+            background: linear-gradient(135deg, rgba(91, 125, 177, 0.05) 0%, rgba(168, 213, 186, 0.05) 100%);
+        }
+
+        .detail-card-icon {
+            font-size: 20px;
+            margin-right: 12px;
+        }
+
+        .detail-card-title {
+            font-family: 'ZCOOL XiaoWei', serif;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 15px;
+        }
+
+        .detail-card-content {
+            padding: 16px 20px;
+            max-height: 150px;
+            overflow-y: auto;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .detail-card-content::-webkit-scrollbar {
+            height: 6px;
+            width: 6px;
+        }
+
+        .detail-card-content::-webkit-scrollbar-track {
+            background: rgba(91, 125, 177, 0.1);
+            border-radius: 3px;
+        }
+
+        .detail-card-content::-webkit-scrollbar-thumb {
+            background: rgba(91, 125, 177, 0.3);
+            border-radius: 3px;
+        }
+
+        .detail-card-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(91, 125, 177, 0.5);
         }
 
         .quote-trigger {
@@ -316,10 +368,10 @@
         }
 
         .quote-trigger .full-quote {
-            position: absolute;
-            bottom: 120%;
+            position: fixed;
+            top: 50%;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) translateY(-50%) scale(0.9);
             background: var(--white);
             padding: 24px;
             border-radius: 16px;
@@ -328,26 +380,30 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
-            z-index: 100;
+            z-index: 1001;
             font-size: 15px;
             line-height: 1.8;
             text-align: center;
             font-style: italic;
+            max-height: 80vh;
+            overflow-y: auto;
         }
 
         .quote-trigger .full-quote::after {
             content: '';
             position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 10px solid transparent;
-            border-top-color: var(--white);
+            top: 16px;
+            right: 16px;
+            width: 20px;
+            height: 20px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%237A7A7A' stroke-width='2'%3E%3Cpath d='M6 18L18 6M6 6l12 12'/%3E%3C/svg%3E") no-repeat center;
+            cursor: pointer;
         }
 
         .quote-trigger.active .full-quote {
             opacity: 1;
             visibility: visible;
+            transform: translateX(-50%) translateY(-50%) scale(1);
         }
 
         .fade-in {
@@ -1102,23 +1158,31 @@
             }
 
             .data-highlight .detail-card {
-                width: 240px;
-                left: 0;
-                transform: translateX(0) translateY(10px);
+                width: calc(100vw - 32px);
+                max-width: 280px;
+                position: fixed;
+                top: auto;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%) translateY(0);
             }
 
             .data-highlight.active .detail-card {
-                transform: translateX(0) translateY(0);
+                transform: translateX(-50%) translateY(0);
             }
 
             .quote-trigger .full-quote {
-                width: 260px;
-                left: 0;
-                transform: translateX(0);
+                width: calc(100vw - 32px);
+                max-width: 280px;
+                position: fixed;
+                top: auto;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%) translateY(0);
             }
 
             .quote-trigger.active .full-quote {
-                transform: translateX(0);
+                transform: translateX(-50%) translateY(0);
             }
 
             .centered-content {
@@ -1257,21 +1321,21 @@
                     <div class="card-stat handwriting" data-value="73" data-stat="chapter2.cards[0].stat">73<span style="font-size: 24px;" data-stat-unit="chapter2.cards[0].statUnit">亿元</span></div>
                     <div class="card-title" data-content="chapter2.cards[0].title">2024年融资总额</div>
                     <div class="card-text" data-card-text="chapter2.cards[0].text">
-                        据不完全统计，2024年中国具身智能领域公开融资事件超过<span class="data-highlight" data-highlight="chapter2.cards[0].dataHighlight">40<span class="detail-card">40起融资事件，分布在天使轮到B轮各阶段，单笔最高融资额达12亿元。</span></span>起，涉及资金超过73亿元。
+                        据不完全统计，2024年中国具身智能领域公开融资事件超过<span class="data-highlight" data-highlight="chapter2.cards[0].dataHighlight">40<span class="detail-card"><div class="detail-card-header"><span class="detail-card-icon">🏃‍</span><span class="detail-card-title">详细数据</span></div><div class="detail-card-content">40起融资事件，分布在天使轮到B轮各阶段，单笔最高融资额达12亿元。</div></span></span>起，涉及资金超过73亿元。
                     </div>
                 </div>
                 <div class="card fade-in fade-in-delay-1" data-card-index="1">
                     <div class="card-stat handwriting" data-stat="chapter2.cards[1].stat">12<span style="font-size: 24px;" data-stat-unit="chapter2.cards[1].statUnit">家</span></div>
                     <div class="card-title" data-content="chapter2.cards[1].title">头部企业</div>
                     <div class="card-text" data-card-text="chapter2.cards[1].text">
-                        获得大额融资的企业包括<span class="data-highlight" data-highlight="chapter2.cards[1].dataHighlights[0]">星动纪元<span class="detail-card">星动纪元：专注通用人形机器人研发，2024年完成超10亿元A轮融资，投资方包括红杉、高瓴等。</span></span>、<span class="data-highlight" data-highlight="chapter2.cards[1].dataHighlights[1]">宇树科技<span class="detail-card">宇树科技：以四足机器人起家，2023年开始布局人形机器人，已完成多轮融资。</span></span>、<span class="data-highlight" data-highlight="chapter2.cards[1].dataHighlights[2]">智元机器人<span class="detail-card">智元机器人：由前华为天才少年创立，团队规模快速扩张至300+人。</span></span>等。
+                        获得大额融资的企业包括<span class="data-highlight" data-highlight="chapter2.cards[1].dataHighlights[0]">星动纪元<span class="detail-card"><div class="detail-card-header"><span class="detail-card-icon">🏃‍</span><span class="detail-card-title">企业介绍</span></div><div class="detail-card-content">星动纪元：专注通用人形机器人研发，2024年完成超10亿元A轮融资，投资方包括红杉、高瓴等。</div></span></span>、<span class="data-highlight" data-highlight="chapter2.cards[1].dataHighlights[1]">宇树科技<span class="detail-card"><div class="detail-card-header"><span class="detail-card-icon">🏃‍</span><span class="detail-card-title">企业介绍</span></div><div class="detail-card-content">宇树科技：以四足机器人起家，2023年开始布局人形机器人，已完成多轮融资。</div></span></span>、<span class="data-highlight" data-highlight="chapter2.cards[1].dataHighlights[2]">智元机器人<span class="detail-card"><div class="detail-card-header"><span class="detail-card-icon">🏃‍</span><span class="detail-card-title">企业介绍</span></div><div class="detail-card-content">智元机器人：由前华为天才少年创立，团队规模快速扩张至300+人。</div></span></span>等。
                     </div>
                 </div>
                 <div class="card fade-in fade-in-delay-2" data-card-index="2">
                     <div class="card-stat handwriting" data-value="3.2" data-stat="chapter2.cards[2].stat">3.2<span style="font-size: 24px;" data-stat-unit="chapter2.cards[2].statUnit">倍</span></div>
                     <div class="card-title" data-content="chapter2.cards[2].title">热度攀升</div>
                     <div class="card-text" data-card-text="chapter2.cards[2].text">
-                        与2022年相比，2024年具身智能相关论文发表数量增长<span class="data-highlight" data-highlight="chapter2.cards[2].dataHighlight">3.2<span class="detail-card">从2022年的约2800篇增长至2024年的约9000篇，但真正落地的产品凤毛麟角。</span></span>倍，但产业落地仍处于早期。
+                        与2022年相比，2024年具身智能相关论文发表数量增长<span class="data-highlight" data-highlight="chapter2.cards[2].dataHighlight">3.2<span class="detail-card"><div class="detail-card-header"><span class="detail-card-icon">🏃‍</span><span class="detail-card-title">数据说明</span></div><div class="detail-card-content">从2022年的约2800篇增长至2024年的约9000篇，但真正落地的产品凤毛麟角。</div></span></span>倍，但产业落地仍处于早期。
                     </div>
                 </div>
             </div>
@@ -1309,21 +1373,21 @@
                     <div class="timeline-date handwriting" data-content="chapter3.timeline[0].date">展前 72小时</div>
                     <div class="timeline-title" data-content="chapter3.timeline[0].title">最后彩排</div>
                     <div class="timeline-text" data-timeline-text="chapter3.timeline[0].text">
-                        工程师们开始对机器人进行"特殊调校"——<span class="data-highlight" data-highlight="chapter3.timeline[0].dataHighlight">调低动态响应速度<span class="detail-card">将机器人的运动速度从实际性能的80%降至40%，牺牲响应速度换取动作的"优雅感"和"可预测性"，减少失误概率。</span></span>，让它看起来更加"从容"。
+                        工程师们开始对机器人进行"特殊调校"——<span class="data-highlight" data-highlight="chapter3.timeline[0].dataHighlight">调低动态响应速度<span class="detail-card"><div class="detail-card-header"><span class="detail-card-icon">🏃‍</span><span class="detail-card-title">幕后细节</span></div><div class="detail-card-content">将机器人的运动速度从实际性能的80%降至40%，牺牲响应速度换取动作的"优雅感"和"可预测性"，减少失误概率。</div></span></span>，让它看起来更加"从容"。
                     </div>
                 </div>
                 <div class="timeline-item" data-timeline-index="1">
                     <div class="timeline-date handwriting" data-content="chapter3.timeline[1].date">展前 24小时</div>
                     <div class="timeline-title" data-content="chapter3.timeline[1].title">围栏搭建</div>
                     <div class="timeline-text" data-timeline-text="chapter3.timeline[1].text">
-                        展台周围搭建起<span class="data-highlight" data-highlight="chapter3.timeline[1].dataHighlight">安全围栏<span class="detail-card">展台围栏不仅是安全考虑，更是"舞台边界"——确保观众始终处于最佳观看角度，看不到任何"穿帮"镜头。</span></span>，不仅为了安全，更是为了控制观众的"视角"。
+                        展台周围搭建起<span class="data-highlight" data-highlight="chapter3.timeline[1].dataHighlight">安全围栏<span class="detail-card"><div class="detail-card-header"><span class="detail-card-icon">🏃‍</span><span class="detail-card-title">设计意图</span></div><div class="detail-card-content">展台围栏不仅是安全考虑，更是"舞台边界"——确保观众始终处于最佳观看角度，看不到任何"穿帮"镜头。</div></span></span>，不仅为了安全，更是为了控制观众的"视角"。
                     </div>
                 </div>
                 <div class="timeline-item" data-timeline-index="2">
                     <div class="timeline-date handwriting" data-content="chapter3.timeline[2].date">展会期间</div>
                     <div class="timeline-title" data-content="chapter3.timeline[2].title">完美演出</div>
                     <div class="timeline-text" data-timeline-text="chapter3.timeline[2].text">
-                        机器人在舞台上完成一次次<span class="data-highlight" data-highlight="chapter3.timeline[2].dataHighlight">预设动作<span class="detail-card">90%以上的"展示"动作都是提前编程的预设动作，实时AI决策参与度不超过10%。这与宣传中"具身智能""自主决策"的描述存在不小差距。</span></span>，观众惊叹不已，掌声雷动。
+                        机器人在舞台上完成一次次<span class="data-highlight" data-highlight="chapter3.timeline[2].dataHighlight">预设动作<span class="detail-card"><div class="detail-card-header"><span class="detail-card-icon">🏃‍</span><span class="detail-card-title">技术真相</span></div><div class="detail-card-content">90%以上的"展示"动作都是提前编程的预设动作，实时AI决策参与度不超过10%。这与宣传中"具身智能""自主决策"的描述存在不小差距。</div></span></span>，观众惊叹不已，掌声雷动。
                     </div>
                 </div>
                 <div class="timeline-item" data-timeline-index="3">
@@ -1414,7 +1478,7 @@
                     </svg>
                     <div class="card-title" data-content="chapter4.cards[0].title">运动控制的难题</div>
                     <div class="card-text" data-card-text="chapter4.cards[0].text">
-                        人形机器人需要<span class="data-highlight" data-highlight="chapter4.cards[0].dataHighlight">30+<span class="detail-card">30+个自由度关节，每个关节都需要精确的力控和位置控制算法。目前，即使是最先进的机器人，在不平整地面上行走时摔倒的概率仍高达15%。</span></span>个关节协同工作，而人类大脑可以轻松完成的动作，对机器而言却需要极其复杂的算法支撑。
+                        人形机器人需要<span class="data-highlight" data-highlight="chapter4.cards[0].dataHighlight">30+<span class="detail-card"><div class="detail-card-header"><span class="detail-card-icon">🏃‍</span><span class="detail-card-title">技术参数</span></div><div class="detail-card-content">30+个自由度关节，每个关节都需要精确的力控和位置控制算法。目前，即使是最先进的机器人，在不平整地面上行走时摔倒的概率仍高达15%。</div></span></span>个关节协同工作，而人类大脑可以轻松完成的动作，对机器而言却需要极其复杂的算法支撑。
                     </div>
                 </div>
                 <div class="card fade-in fade-in-delay-1" data-card-index="1">
@@ -1424,7 +1488,7 @@
                     </svg>
                     <div class="card-title" data-content="chapter4.cards[1].title">能源续航的困境</div>
                     <div class="card-text" data-card-text="chapter4.cards[1].text">
-                        目前量的人形机器人续航普遍只有<span class="data-highlight" data-highlight="chapter4.cards[1].dataHighlight">2-4<span class="detail-card">满负载运行状态下，续航通常只有2-4小时。待机时间虽然可以延长至8-12小时，但实际工作时长远远不能满足连续作业需求。</span></span>小时，而人类可以连续工作8小时以上。如何提升能量密度，是一道难解的题。
+                        目前量的人形机器人续航普遍只有<span class="data-highlight" data-highlight="chapter4.cards[1].dataHighlight">2-4<span class="detail-card"><div class="detail-card-header"><span class="detail-card-icon">🏃‍</span><span class="detail-card-title">续航说明</span></div><div class="detail-card-content">满负载运行状态下，续航通常只有2-4小时。待机时间虽然可以延长至8-12小时，但实际工作时长远远不能满足连续作业需求。</div></span></span>小时，而人类可以连续工作8小时以上。如何提升能量密度，是一道难解的题。
                     </div>
                 </div>
                 <div class="card fade-in fade-in-delay-2" data-card-index="2">
@@ -1436,7 +1500,7 @@
                     </svg>
                     <div class="card-title" data-content="chapter4.cards[2].title">成本与量产的距离</div>
                     <div class="card-text" data-card-text="chapter4.cards[2].text">
-                        人形机器人的成本仍然高昂，<span class="data-highlight" data-highlight="chapter4.cards[2].dataHighlight">50万-200万<span class="detail-card">单台人形机器人的成本在50万至200万人民币之间，远高于一般工业机器人(5-20万)和协作机器人(10-30万)。规模化量产需要整个产业链的协同配合。</span></span>的售价让大多数应用场景望而却步。量产之路，道阻且长。
+                        人形机器人的成本仍然高昂，<span class="data-highlight" data-highlight="chapter4.cards[2].dataHighlight">50万-200万<span class="detail-card"><div class="detail-card-header"><span class="detail-card-icon">🏃‍</span><span class="detail-card-title">成本分析</span></div><div class="detail-card-content">单台人形机器人的成本在50万至200万人民币之间，远高于一般工业机器人(5-20万)和协作机器人(10-30万)。规模化量产需要整个产业链的协同配合。</div></span></span>的售价让大多数应用场景望而却步。量产之路，道阻且长。
                     </div>
                 </div>
             </div>
@@ -1612,7 +1676,7 @@
 
             <div data-paragraphs="chapter6.paragraphs" class="chapter-paragraphs">
                 <p class="fade-in" data-paragraph-index="0">
-                    技术的发展从来不是线性的。<span class="data-highlight" data-highlight="chapter6.paragraphs[0].dataHighlight">1980<span class="detail-card">1980年代也曾有过一次人形机器人热潮，MIT、索尼、本田等机构都推出过令人惊叹的原型机。但那一次热潮最终归于沉寂，直到近十年才重新爆发。</span></span>年代的人形机器人和今天的相比，差距天壤之别。
+                    技术的发展从来不是线性的。<span class="data-highlight" data-highlight="chapter6.paragraphs[0].dataHighlight">1980<span class="detail-card"><div class="detail-card-header"><span class="detail-card-icon">🏃‍</span><span class="detail-card-title">历史回顾</span></div><div class="detail-card-content">1980年代也曾有过一次人形机器人热潮，MIT、索尼、本田等机构都推出过令人惊叹的原型机。但那一次热潮最终归于沉寂，直到近十年才重新爆发。</div></span></span>年代的人形机器人和今天的相比，差距天壤之别。
                     历史告诉我们，突破往往在最意想不到的时刻到来。
                 </p>
 

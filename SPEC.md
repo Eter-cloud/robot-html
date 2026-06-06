@@ -128,7 +128,6 @@
 - `IntersectionObserver` API
 
 ### 性能优化
-- 延迟加载非首屏 SVG
 - CSS 动画使用 `transform` 和 `opacity`
 - 减少重排重绘
 
