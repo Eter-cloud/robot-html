@@ -3,23 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>人形机器人狂热之下：一场不知道终点的马拉松</title>
+    <title>看起来和实际上——一场提前开始的马拉松</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* 橙线插画美学 — 提炼自 1.png */
             --orange: #F97316;
             --orange-soft: rgba(249, 115, 22, 0.12);
             --orange-muted: rgba(249, 115, 22, 0.45);
             --ink: #1A1A1A;
             --line: rgba(26, 26, 26, 0.12);
             --line-strong: rgba(26, 26, 26, 0.22);
-            --primary: #F97316;
-            --secondary: #888888;
-            --accent: #1A1A1A;
-            --accent2: #FDBA74;
             --bg: #FFFFFF;
             --bg-alt: #FAFAFA;
             --text: #333333;
@@ -28,12 +23,6 @@
             --white: #FFFFFF;
             --shadow: rgba(0, 0, 0, 0.04);
             --shadow-strong: rgba(0, 0, 0, 0.08);
-            --chapter1: transparent;
-            --chapter2: transparent;
-            --chapter3: transparent;
-            --chapter4: transparent;
-            --chapter5: transparent;
-            --chapter6: transparent;
         }
 
         * {
@@ -57,13 +46,7 @@
             overflow-x: hidden;
         }
 
-        .serif {
-            font-family: 'Noto Serif SC', Georgia, serif;
-        }
-
-        .handwriting {
-            font-family: 'ZCOOL XiaoWei', serif;
-        }
+        .serif { font-family: 'Noto Serif SC', Georgia, serif; }
 
         ::selection {
             background-color: var(--orange-soft);
@@ -169,15 +152,16 @@
         }
 
         .chapter-number {
-            font-family: 'Noto Sans SC', sans-serif;
-            font-size: 18px;
-            font-weight: 500;
-            color: var(--text-light);
-            letter-spacing: 0.12em;
-            margin-bottom: 24px;
+            font-family: 'Noto Serif SC', serif;
+            font-size: clamp(18px, 3.5vw, 24px);
+            font-weight: 700;
+            color: var(--ink);
+            letter-spacing: 0.18em;
+            margin-bottom: 40px;
             display: block;
-            padding-left: 56px;
+            padding-left: 60px;
             position: relative;
+            line-height: 1.6;
         }
 
         .chapter-number::before {
@@ -186,9 +170,21 @@
             left: 0;
             top: 50%;
             transform: translateY(-50%);
-            width: 40px;
-            height: 3px;
+            width: 48px;
+            height: 4px;
             background: var(--orange);
+        }
+
+        .chapter-number::after {
+            content: '';
+            position: absolute;
+            left: 48px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background: var(--orange);
+            border-radius: 50%;
         }
 
         .chapter-title {
@@ -227,36 +223,24 @@
             transition: all 0.3s ease;
             position: relative;
             display: inline-block;
-            border-radius: 0;
             border-bottom: 1px solid var(--orange-muted);
             font-family: 'Noto Sans SC', sans-serif;
             font-weight: 400;
             z-index: 1000;
         }
-
         .data-highlight::before {
             content: '';
             position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
+            top: -4px; left: -4px; right: -4px; bottom: -4px;
             border: 1px dashed var(--line-strong);
-            border-radius: 0;
             opacity: 0;
             transition: opacity 0.3s ease;
         }
-
-        .data-highlight:hover::before {
-            opacity: 1;
-        }
-
+        .data-highlight:hover::before { opacity: 1; }
         .data-highlight:hover {
             background: linear-gradient(180deg, transparent 55%, var(--orange-soft) 55%);
-            transform: none;
             color: var(--ink);
         }
-
         .data-highlight .detail-card {
             position: absolute;
             top: calc(100% + 8px);
@@ -264,7 +248,6 @@
             transform: translateX(-50%) translateY(10px);
             background: var(--white);
             padding: 0;
-            border-radius: 0;
             box-shadow: 0 4px 24px var(--shadow-strong);
             width: 280px;
             opacity: 0;
@@ -282,30 +265,25 @@
         .data-highlight .detail-card::before {
             content: '';
             position: absolute;
-            top: -8px;
-            left: 50%;
+            top: -8px; left: 50%;
             transform: translateX(-50%);
             border: 8px solid transparent;
             border-bottom-color: var(--orange);
         }
-
         .data-highlight .detail-card::after {
             content: '';
             position: absolute;
-            top: -5px;
-            left: 50%;
+            top: -5px; left: 50%;
             transform: translateX(-50%);
             border: 6px solid transparent;
             border-bottom-color: var(--white);
         }
-
         .data-highlight.active .detail-card {
             opacity: 1;
             visibility: visible;
             transform: translateX(-50%) translateY(0);
             pointer-events: auto;
         }
-
         .detail-card-header {
             display: flex;
             align-items: center;
@@ -313,47 +291,20 @@
             border-bottom: 1px solid var(--line);
             background: var(--bg-alt);
         }
-
-        .detail-card-icon {
-            font-size: 20px;
-            margin-right: 12px;
-        }
-
-        .detail-card-title {
-            font-family: 'Noto Sans SC', sans-serif;
-            font-weight: 500;
-            color: var(--ink);
-            font-size: 14px;
-        }
-
+        .detail-card-icon { font-size: 20px; margin-right: 12px; }
+        .detail-card-title { font-family: 'Noto Sans SC', sans-serif; font-weight: 500; color: var(--ink); font-size: 14px; }
         .detail-card-content {
             padding: 16px 20px;
             max-height: 150px;
-            overflow-y: auto;
-            overflow-x: auto;
+            overflow: auto;
             white-space: pre-wrap;
-            overflow-x: auto;
             -webkit-overflow-scrolling: touch;
         }
 
-        .detail-card-content::-webkit-scrollbar {
-            height: 6px;
-            width: 6px;
-        }
-
-        .detail-card-content::-webkit-scrollbar-track {
-            background: var(--bg-alt);
-            border-radius: 3px;
-        }
-
-        .detail-card-content::-webkit-scrollbar-thumb {
-            background: var(--line-strong);
-            border-radius: 3px;
-        }
-
-        .detail-card-content::-webkit-scrollbar-thumb:hover {
-            background: var(--text-muted);
-        }
+        .detail-card-content::-webkit-scrollbar { height: 6px; width: 6px; }
+        .detail-card-content::-webkit-scrollbar-track { background: var(--bg-alt); border-radius: 3px; }
+        .detail-card-content::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 3px; }
+        .detail-card-content::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
         .quote-trigger {
             font-family: 'Noto Serif SC', serif;
@@ -364,34 +315,17 @@
             border-bottom: 1px dashed var(--line-strong);
             transition: all 0.3s ease;
             padding: 2px 4px;
-            background: transparent;
         }
-
-        .quote-trigger::before {
+        .quote-trigger::before, .quote-trigger::after {
             content: '"';
             font-family: 'Noto Serif SC', serif;
             color: var(--text-muted);
-            margin-right: 2px;
             transition: all 0.3s ease;
         }
-
-        .quote-trigger::after {
-            content: '"';
-            font-family: 'Noto Serif SC', serif;
-            color: var(--text-muted);
-            margin-left: 2px;
-            transition: all 0.3s ease;
-        }
-
-        .quote-trigger:hover {
-            color: var(--ink);
-            border-bottom-color: var(--orange);
-        }
-
-        .quote-trigger:hover::before,
-        .quote-trigger:hover::after {
-            color: var(--orange);
-        }
+        .quote-trigger::before { margin-right: 2px; }
+        .quote-trigger::after { margin-left: 2px; }
+        .quote-trigger:hover { border-bottom-color: var(--orange); }
+        .quote-trigger:hover::before, .quote-trigger:hover::after { color: var(--orange); }
 
         .quote-trigger .full-quote {
             position: fixed;
@@ -456,21 +390,6 @@
             opacity: 0.6;
         }
 
-        .dot-pattern {
-            width: 60px;
-            height: 60px;
-        }
-
-        .wave-line {
-            height: 20px;
-            width: 120px;
-        }
-
-        .star {
-            width: 24px;
-            height: 24px;
-        }
-
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
@@ -481,18 +400,7 @@
             50% { opacity: 1; transform: scale(1.2); }
         }
 
-        @keyframes runner-bounce {
-            0%, 100% { transform: translateY(0) rotate(-5deg); }
-            50% { transform: translateY(-15px) rotate(5deg); }
-        }
 
-        .floating {
-            animation: float 4s ease-in-out infinite;
-        }
-
-        .twinkle {
-            animation: twinkle 2s ease-in-out infinite;
-        }
 
         .hero {
             min-height: 100vh;
@@ -622,17 +530,43 @@
         .chapter-5,
         .chapter-6 {
             background: var(--bg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.2;
+            pointer-events: none;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .chapter-2 .chapter-bg {
+            background-image: url('02.png');
+        }
+
+        .chapter-4 .chapter-bg {
+            background-image: url('04.png');
+        }
+
+        .chapter-2 .chapter-paragraphs,
+        .chapter-3 .chapter-paragraphs,
+        .chapter-4 .chapter-paragraphs {
+            background: rgba(249, 115, 22, 0.08);
+            padding: 24px;
+            border-radius: 0;
         }
 
         .illustration-container {
             display: flex;
             justify-content: center;
             margin: 64px 0;
-        }
-
-        .illustration {
-            max-width: 100%;
-            height: auto;
         }
 
         .timeline {
@@ -745,23 +679,11 @@
             transform: scaleX(1);
         }
 
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            margin-bottom: 16px;
-        }
-
         .card-title {
             font-family: 'Noto Serif SC', serif;
             font-size: 18px;
             font-weight: 600;
             margin-bottom: 12px;
-        }
-
-        .card-text {
-            font-size: 14px;
-            color: var(--text-light);
-            line-height: 1.8;
         }
 
         .card-stat {
@@ -770,187 +692,6 @@
             color: var(--ink);
             margin-bottom: 8px;
             font-weight: 600;
-        }
-
-        .tech-diagram {
-            background: var(--white);
-            border-radius: 0;
-            padding: 40px;
-            margin: 40px 0;
-            border: 1px solid var(--line);
-            box-shadow: none;
-        }
-
-        .tech-flow {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 16px;
-            margin: 32px 0;
-        }
-
-        .tech-node {
-            background: var(--white);
-            color: var(--ink);
-            padding: 14px 22px;
-            border-radius: 0;
-            font-size: 14px;
-            font-weight: 400;
-            position: relative;
-            transition: all 0.3s ease;
-            border: 1px solid var(--ink);
-        }
-
-        .tech-node.bottleneck {
-            background: var(--orange-soft);
-            border-color: var(--orange);
-            color: var(--ink);
-        }
-
-        .tech-node:hover {
-            background: var(--orange);
-            color: var(--white);
-            border-color: var(--orange);
-            transform: none;
-        }
-
-        .tech-arrow {
-            color: var(--text-muted);
-            font-size: 20px;
-        }
-
-        .person-card {
-            background: var(--white);
-            border-radius: 0;
-            padding: 36px;
-            margin: 32px 0;
-            box-shadow: none;
-            border: 1px solid var(--line);
-            display: flex;
-            gap: 28px;
-            align-items: flex-start;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-
-        .person-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background: var(--orange);
-        }
-
-        .person-card:hover {
-            box-shadow: 0 4px 20px var(--shadow);
-        }
-
-        .person-card .runner-decoration {
-            position: absolute;
-            bottom: 16px;
-            right: 24px;
-            font-size: 24px;
-            opacity: 0.15;
-        }
-
-        .person-avatar {
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            background: var(--bg-alt);
-            border: 1px solid var(--line);
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .person-info {
-            flex: 1;
-        }
-
-        .person-name {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .person-role {
-            font-size: 13px;
-            color: var(--text-light);
-            margin-bottom: 12px;
-            letter-spacing: 0.06em;
-        }
-
-        .person-quote {
-            font-style: italic;
-            color: var(--text-light);
-            font-size: 15px;
-            line-height: 1.9;
-            border-left: 2px solid var(--orange);
-            padding-left: 20px;
-        }
-
-        .person-card.reverse {
-            flex-direction: row-reverse;
-        }
-
-        .closing-section {
-            text-align: center;
-            padding: 140px 32px;
-            background: var(--bg);
-            border-top: 1px solid var(--line);
-        }
-
-        .closing-title {
-            font-family: 'Noto Serif SC', serif;
-            font-size: clamp(24px, 4vw, 36px);
-            font-weight: 600;
-            margin-bottom: 32px;
-            line-height: 1.5;
-            letter-spacing: 0.04em;
-            color: var(--ink);
-        }
-
-        .closing-title::after {
-            content: '';
-            display: block;
-            width: 40px;
-            height: 3px;
-            background: var(--orange);
-            margin: 24px auto 0;
-        }
-
-        .closing-text {
-            max-width: 600px;
-            margin: 0 auto 48px;
-            font-size: 17px;
-            color: var(--text-light);
-            font-weight: 300;
-            line-height: 2;
-        }
-
-        .closing-decoration {
-            margin: 60px auto 0;
-        }
-
-        .closing-decoration svg {
-            max-width: 300px;
-        }
-
-        .closing-decoration::before {
-            content: '终点还在前方';
-            display: block;
-            font-family: 'Noto Sans SC', sans-serif;
-            color: var(--text-light);
-            font-size: 13px;
-            margin-bottom: 16px;
-            letter-spacing: 0.15em;
         }
 
         footer {
@@ -972,12 +713,6 @@
             background: var(--orange);
         }
 
-        .footer-text {
-            font-size: 14px;
-            color: var(--text-light);
-            letter-spacing: 0.04em;
-        }
-
         .flourish-container {
             margin: 48px 0;
             border-radius: 0;
@@ -996,7 +731,7 @@
 
         .side-nav {
             position: fixed;
-            right: 24px;
+            right: 40px;
             top: 50%;
             transform: translateY(-50%);
             display: flex;
@@ -1040,30 +775,28 @@
         .side-nav-item::before {
             content: attr(data-km);
             position: absolute;
-            left: -28px;
+            left: -52px;
             font-family: 'Noto Sans SC', sans-serif;
             font-size: 10px;
             color: var(--text-light);
             opacity: 0;
             transition: all 0.2s ease;
+            white-space: nowrap;
+            padding-right: 4px;
         }
 
         .side-nav-item:hover::before,
         .side-nav-item.active::before {
             opacity: 1;
-            left: -32px;
+            left: -56px;
         }
 
-        .side-nav-item:hover,
-        .side-nav-item.active {
+        .side-nav-item:hover, .side-nav-item.active {
             background: var(--orange);
             border-color: var(--orange);
             transform: scale(1.2);
         }
-
-        .side-nav-item.active {
-            animation: checkpoint-pulse 1.5s ease-in-out infinite;
-        }
+        .side-nav-item.active { animation: checkpoint-pulse 1.5s ease-in-out infinite; }
 
         .side-nav-item .nav-label {
             position: absolute;
@@ -1115,11 +848,6 @@
             visibility: visible;
         }
 
-        .responsive-image {
-            max-width: 100%;
-            height: auto;
-        }
-
         .overlay {
             position: fixed;
             top: 0;
@@ -1139,62 +867,14 @@
         }
 
         @media (max-width: 768px) {
-            .section {
-                padding: 60px 0;
-            }
-
-            .hero {
-                min-height: 90vh;
-            }
-
-            .side-nav {
-                display: none;
-            }
-
-            .person-card {
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-            }
-
-            .person-quote {
-                border-left: none;
-                padding-left: 0;
-                border-top: 2px solid var(--orange);
-                padding-top: 16px;
-            }
-
-            .card-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .tech-flow {
-                flex-direction: column;
-            }
-
-            .tech-arrow {
-                transform: rotate(90deg);
-            }
-
-            .timeline {
-                padding-left: 40px;
-            }
-
-            .timeline-item {
-                padding: 20px;
-            }
-
-            .timeline-item::before {
-                left: -36px;
-                width: 24px;
-                height: 24px;
-                font-size: 10px;
-            }
-
-            .hero-scroll-hint::after {
-                content: '继续';
-            }
-
+            .section { padding: 60px 0; }
+            .hero { min-height: 90vh; }
+            .side-nav { display: none; }
+            .card-grid { grid-template-columns: 1fr; }
+            .timeline { padding-left: 40px; }
+            .timeline-item { padding: 20px; }
+            .timeline-item::before { left: -36px; width: 24px; height: 24px; font-size: 10px; }
+            .hero-scroll-hint::after { content: '继续'; }
             .data-highlight .detail-card {
                 width: calc(100vw - 32px);
                 max-width: 280px;
@@ -1204,11 +884,7 @@
                 left: 50%;
                 transform: translateX(-50%) translateY(0);
             }
-
-            .data-highlight.active .detail-card {
-                transform: translateX(-50%) translateY(0);
-            }
-
+            .data-highlight.active .detail-card { transform: translateX(-50%) translateY(0); }
             .quote-trigger .full-quote {
                 width: calc(100vw - 32px);
                 max-width: 280px;
@@ -1218,40 +894,16 @@
                 left: 50%;
                 transform: translateX(-50%) translateY(0);
             }
-
-            .quote-trigger.active .full-quote {
-                transform: translateX(-50%) translateY(0);
-            }
-
-            .centered-content {
-                max-width: 100%;
-                padding: 0 16px;
-            }
-
-            .centered-content p {
-                font-size: 15px;
-                text-align: left;
-                text-indent: 2em;
-            }
-
-            .chapter-paragraphs p {
-                font-size: 15px;
-                text-indent: 2em;
-            }
+            .quote-trigger.active .full-quote { transform: translateX(-50%) translateY(0); }
+            .centered-content { max-width: 100%; padding: 0 16px; }
+            .centered-content p { font-size: 15px; text-align: left; text-indent: 2em; }
+            .chapter-paragraphs p { font-size: 15px; text-indent: 2em; }
         }
 
         .illustration-svg {
             width: 100%;
             max-width: 600px;
             height: auto;
-        }
-
-        .orange-line-hero {
-            width: min(420px, 88vw);
-            max-width: 100%;
-            height: auto;
-            margin-bottom: 32px;
-            display: block;
         }
 
         .orange-line-illust {
@@ -1262,33 +914,25 @@
             margin: 0 auto;
         }
 
-        .cloud {
-            fill: rgba(255, 255, 255, 0.8);
-        }
-
-        .robot-body {
-            fill: var(--white);
-            stroke: var(--ink);
-            stroke-width: 2;
-        }
-
-        .robot-accent {
-            fill: var(--orange);
-        }
-
-        .robot-joint {
-            fill: var(--text-muted);
-        }
-
-        .track-line {
-            stroke: var(--line-strong);
-            stroke-width: 1;
-            stroke-dasharray: 10, 5;
-        }
-
-        .star-shape {
-            fill: var(--orange);
-        }
+        .viz-legend-row { display: flex; gap: 24px; margin-bottom: 24px; font-size: 13px; }
+        .viz-legend-item { display: flex; align-items: center; gap: 8px; }
+        .viz-legend-text { font-weight: 400; }
+        .viz-timeline-wrap { position: relative; padding-left: 80px; }
+        .viz-timeline-item { position: relative; margin-bottom: 32px; }
+        .viz-timeline-item:last-child { margin-bottom: 16px; }
+        .viz-date-label { position: absolute; left: -80px; top: 0; width: 70px; }
+        .viz-card-row { display: flex; gap: 16px; align-items: stretch; }
+        .viz-arrow-wrap { display: flex; align-items: center; color: var(--text-muted); }
+        .viz-tag { font-size: 11px; opacity: 0.9; margin-bottom: 6px; }
+        .viz-title { font-size: 14px; font-weight: 600; line-height: 1.5; }
+        .viz-desc { font-size: 12px; opacity: 0.85; margin-top: 8px; line-height: 1.5; }
+        .viz-number { font-size: 20px; font-weight: 600; color: var(--orange); }
+        .viz-unit { font-size: 13px; margin-top: 4px; }
+        .viz-divider { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line); }
+        .viz-emphasis { font-size: 16px; font-weight: 700; }
+        .viz-list { font-size: 13px; font-weight: 500; color: var(--ink); line-height: 1.8; }
+        .viz-tag-item { padding: 4px 8px; background: var(--orange-soft); margin-bottom: 6px; }
+        .viz-tag-item:last-child { margin-bottom: 0; }
 
         /* 参考文献卡片样式 */
         .references-section {
@@ -1450,6 +1094,447 @@
         .footer-team p:last-child {
             margin-bottom: 0;
         }
+
+        .data-info-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--white);
+            border: 1px solid var(--line);
+            border-left: 3px solid var(--orange);
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 400;
+            letter-spacing: 0.04em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: -16px;
+            margin-bottom: 24px;
+        }
+
+        .data-info-btn:hover {
+            background: var(--orange-soft);
+            border-color: var(--orange-muted);
+            color: var(--ink);
+        }
+
+        .data-info-btn .btn-icon {
+            font-size: 16px;
+            transition: transform 0.3s ease;
+        }
+
+        .data-info-btn.active .btn-icon {
+            transform: rotate(180deg);
+        }
+
+        .data-info-card {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            margin-bottom: 32px;
+        }
+
+        .data-info-card.active {
+            max-height: 500px;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .data-info-content {
+            background: var(--white) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25'%3E%3Crect fill='%23ffffff' width='100%25' height='100%25'/%3E%3C/svg%3E") no-repeat center center;
+            background-size: cover;
+            border: 1px solid var(--line);
+            padding: 24px;
+            font-size: 14px;
+            line-height: 1.9;
+            color: #483332;
+        }
+
+        .data-info-content p {
+            margin-bottom: 16px;
+            font-size: 14px;
+        }
+
+        .data-info-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .data-info-content blockquote {
+            margin: 16px 0;
+            padding: 16px 20px;
+            background: var(--bg-alt);
+            border-left: 3px solid var(--orange);
+            font-size: 13px;
+            line-height: 1.8;
+            color: #483332;
+            font-style: italic;
+        }
+
+        .data-info-content a {
+            color: var(--orange);
+            text-decoration: underline;
+            text-decoration-color: var(--orange-muted);
+        }
+
+        .data-info-content a:hover {
+            color: var(--ink);
+        }
+
+        @media (max-width: 768px) {
+            .data-info-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 20px;
+                margin-top: -8px;
+            }
+
+            .data-info-content {
+                padding: 16px;
+            }
+        }
+
+        .flywheel-container {
+            max-width: 720px;
+            margin: 32px auto;
+            padding: 24px;
+            background: var(--bg-alt);
+            border: 1px solid var(--line);
+            border-left: 4px solid var(--orange);
+            position: relative;
+            width: 100%;
+        }
+
+        .flywheel-title {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--ink);
+            text-align: center;
+            margin-bottom: 8px;
+            letter-spacing: 0.06em;
+            line-height: 1.4;
+        }
+
+        .flywheel-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--orange);
+            margin: 16px auto 32px;
+        }
+
+        .flywheel-visual {
+            position: relative;
+            width: 100%;
+            height: 700px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .flywheel-center-hub {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 180px;
+            height: 180px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 8px 32px var(--shadow-strong), 0 0 0 1px var(--line);
+            z-index: 10;
+        }
+
+        .flywheel-center-hub .hub-icon {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .flywheel-center-hub .hub-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--ink);
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .flywheel-center-hub .hub-subtitle {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 4px;
+            letter-spacing: 0.04em;
+        }
+
+        .flywheel-orbit-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 520px;
+            height: 520px;
+            border: 2px dashed var(--line-strong);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .flywheel-orbit-flow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .flywheel-orbit-flow::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: var(--orange);
+            border-right-color: var(--orange);
+            animation: flywheel-spin 8s linear infinite;
+        }
+
+        @keyframes flywheel-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .flywheel-node {
+            position: absolute;
+            width: 140px;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 16px 12px;
+            text-align: center;
+            box-shadow: 0 4px 20px var(--shadow), 0 0 0 1px var(--line);
+            z-index: 5;
+            transition: all 0.3s ease;
+        }
+
+        .flywheel-node:hover {
+            box-shadow: 0 8px 32px var(--shadow-strong), 0 0 0 2px var(--orange-muted);
+            transform: scale(1.08);
+        }
+
+        .flywheel-node .node-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--orange-soft);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 10px;
+            font-size: 22px;
+        }
+
+        .flywheel-node .node-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+
+        .flywheel-node .node-desc {
+            font-size: 11px;
+            color: var(--text-light);
+            line-height: 1.4;
+        }
+
+        .flywheel-node-1 { top: 30px; left: 50%; transform: translateX(-50%); }
+        .flywheel-node-1:hover { transform: translateX(-50%) scale(1.08); }
+        .flywheel-node-2 { top: 140px; right: 30px; }
+        .flywheel-node-3 { bottom: 140px; right: 30px; }
+        .flywheel-node-4 { bottom: 30px; left: 50%; transform: translateX(-50%); }
+        .flywheel-node-4:hover { transform: translateX(-50%) scale(1.08); }
+        .flywheel-node-5 { bottom: 140px; left: 30px; }
+        .flywheel-node-6 { top: 140px; left: 30px; }
+
+        .flywheel-particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--orange);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--orange);
+            z-index: 4;
+            animation: flywheel-orbit-particle 8s linear infinite;
+        }
+
+        @keyframes flywheel-orbit-particle {
+            0% { top: 30px; left: 50%; transform: translateX(-50%); opacity: 1; }
+            16.6% { top: 140px; right: 30px; left: auto; transform: none; opacity: 1; }
+            33.3% { bottom: 140px; right: 30px; top: auto; left: auto; transform: none; opacity: 1; }
+            50% { bottom: 30px; left: 50%; top: auto; right: auto; transform: translateX(-50%); opacity: 1; }
+            66.6% { bottom: 140px; left: 30px; top: auto; right: auto; transform: none; opacity: 1; }
+            83.3% { top: 140px; left: 30px; bottom: auto; right: auto; transform: none; opacity: 1; }
+            100% { top: 30px; left: 50%; bottom: auto; right: auto; transform: translateX(-50%); opacity: 1; }
+        }
+
+        .flywheel-step-badge {
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: var(--orange);
+            color: var(--white);
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 6;
+            box-shadow: 0 2px 8px var(--orange-muted);
+        }
+
+        .flywheel-step-badge-1 { top: 20px; left: calc(50% + 60px); }
+        .flywheel-step-badge-2 { top: 130px; right: 20px; }
+        .flywheel-step-badge-3 { bottom: 130px; right: 20px; }
+        .flywheel-step-badge-4 { bottom: 20px; left: calc(50% + 60px); }
+        .flywheel-step-badge-5 { bottom: 130px; left: 20px; }
+        .flywheel-step-badge-6 { top: 130px; left: 20px; }
+
+        @keyframes flow-rotate {
+            from {
+                stroke-dasharray: 0 1000;
+                stroke-dashoffset: 0;
+            }
+            to {
+                stroke-dasharray: 1000 0;
+                stroke-dashoffset: -1000;
+            }
+        }
+
+        @keyframes arrow-pulse {
+            0%, 100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .flywheel-container {
+                padding: 16px;
+                margin: 24px auto;
+            }
+            .flywheel-title {
+                font-size: 17px;
+            }
+            .flywheel-visual {
+                height: 520px;
+            }
+            .flywheel-center-hub {
+                width: 120px;
+                height: 120px;
+            }
+            .flywheel-center-hub .hub-icon {
+                font-size: 24px;
+            }
+            .flywheel-center-hub .hub-title {
+                font-size: 12px;
+            }
+            .flywheel-center-hub .hub-subtitle {
+                font-size: 10px;
+            }
+            .flywheel-orbit-ring, .flywheel-orbit-flow {
+                width: 380px;
+                height: 380px;
+            }
+            .flywheel-node {
+                width: 100px;
+                padding: 12px 8px;
+            }
+            .flywheel-node .node-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+                margin: 0 auto 6px;
+            }
+            .flywheel-node .node-title {
+                font-size: 12px;
+            }
+            .flywheel-node .node-desc {
+                font-size: 9px;
+            }
+            .flywheel-node-1, .flywheel-node-4 {
+                top: 15px;
+                bottom: 15px;
+            }
+            .flywheel-node-2, .flywheel-node-6 {
+                top: 90px;
+            }
+            .flywheel-node-3, .flywheel-node-5 {
+                bottom: 90px;
+            }
+            .flywheel-step-badge {
+                width: 20px;
+                height: 20px;
+                font-size: 10px;
+            }
+        }
+
+        @media (max-width: 520px) {
+            .flywheel-visual {
+                height: 400px;
+            }
+            .flywheel-center-hub {
+                width: 100px;
+                height: 100px;
+            }
+            .flywheel-center-hub .hub-icon {
+                font-size: 20px;
+            }
+            .flywheel-center-hub .hub-title {
+                font-size: 11px;
+            }
+            .flywheel-center-hub .hub-subtitle {
+                font-size: 9px;
+            }
+            .flywheel-orbit-ring, .flywheel-orbit-flow {
+                width: 300px;
+                height: 300px;
+            }
+            .flywheel-node {
+                width: 85px;
+                padding: 10px 6px;
+            }
+            .flywheel-node .node-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+                margin: 0 auto 4px;
+            }
+            .flywheel-node .node-title {
+                font-size: 11px;
+            }
+            .flywheel-node .node-desc {
+                font-size: 8px;
+            }
+            .flywheel-node-2, .flywheel-node-6 {
+                top: 65px;
+            }
+            .flywheel-node-3, .flywheel-node-5 {
+                bottom: 65px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1460,19 +1545,19 @@
         <div class="side-nav-item" data-chapter="0" data-km="🚩" data-nav-index="0">
             <span class="nav-label" data-content="nav.items[0].label">起点</span>
         </div>
-        <div class="side-nav-item" data-chapter="1" data-km="5K" data-nav-index="1">
+        <div class="side-nav-item" data-chapter="1" data-km="🏃‍♂️" data-nav-index="1">
             <span class="nav-label" data-content="nav.items[1].label">鸣枪</span>
         </div>
-        <div class="side-nav-item" data-chapter="2" data-km="10K" data-nav-index="2">
+        <div class="side-nav-item" data-chapter="2" data-km="第1公里" data-nav-index="2">
             <span class="nav-label" data-content="nav.items[2].label">欢呼</span>
         </div>
-        <div class="side-nav-item" data-chapter="3" data-km="15K" data-nav-index="3">
+        <div class="side-nav-item" data-chapter="3" data-km="第10公里" data-nav-index="3">
             <span class="nav-label" data-content="nav.items[3].label">冲刺</span>
         </div>
-        <div class="side-nav-item" data-chapter="4" data-km="20K" data-nav-index="4">
+        <div class="side-nav-item" data-chapter="4" data-km="第21公里" data-nav-index="4">
             <span class="nav-label" data-content="nav.items[4].label">瓶颈</span>
         </div>
-        <div class="side-nav-item" data-chapter="5" data-km="35K" data-nav-index="5">
+        <div class="side-nav-item" data-chapter="5" data-km="第30公里" data-nav-index="5">
             <span class="nav-label" data-content="nav.items[5].label">坚持</span>
         </div>
         <div class="side-nav-item" data-chapter="6" data-km="🏁" data-nav-index="6">
@@ -1482,7 +1567,7 @@
 
     <section class="hero" id="hero">
         <div class="hero-content">
-            <img src="1.png" class="illustration floating orange-line-hero" alt="没有人知道终点——人形机器人马拉松主视觉">
+            <img src="cover.png" >
             <h1 class="hero-title serif" data-content="hero.title">人形机器人狂热之下</h1>
             <p class="hero-subtitle" data-content="hero.subtitle">一场不知道终点的马拉松</p>
             <p class="intro-text" style="max-width: 500px; margin: 0 auto;" data-content="hero.intro">
@@ -1502,7 +1587,7 @@
             <span class="chapter-number fade-in" data-content="chapter1.number">一、鸣枪</span>
 
             <div class="illustration-container fade-in fade-in-delay-3">
-                <img src="2.png" class="illustration-svg orange-line-illust" alt="鸣枪起跑——发令枪与赛道起点">
+                <img src="01.png" class="illustration-svg orange-line-illust" alt="拥挤的机器人">
             </div>
 
             <div data-paragraphs="chapter1.paragraphs" class="chapter-paragraphs">
@@ -1520,22 +1605,42 @@
     </section>
 
     <section class="section chapter chapter-2" id="chapter2">
+        <div class="chapter-bg"></div>
         <div class="container">
             <span class="chapter-number fade-in" data-content="chapter2.number">二、第1公里 · 看台上的欢呼</span>
             <p class="chapter-subtitle fade-in fade-in-delay-2" data-content="chapter2.subtitle">
-                过去两年，人形机器人是最耀眼的科技叙事之一
+                近两年，人形机器人是最耀眼的科技叙事之一。
             </p>
 
             <div class="flourish-container fade-in fade-in-delay-3">
                 <div class="flourish-embed flourish-chart" data-src="visualisation/29286206"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/29286206/thumbnail" width="100%" alt="chart visualization" /></noscript></div>
             </div>
 
+            <button class="data-info-btn fade-in fade-in-delay-3" data-target="data-info-card-1">
+                <span class="btn-icon">▼</span>
+                <span>数据说明</span>
+            </button>
+            <div class="data-info-card" id="data-info-card-1">
+                <div class="data-info-content">
+                    <p>1. “文献量”来自<a href="https://www.cnki.net/" target="_blank">中国知网</a>以“人形机器人”为关键词搜索获取的文献量，数据获取时间2026年6月1日。</p>
+                    <p>2. “融资事件和融资金额”数据来自<a href="https://mp.weixin.qq.com/s/zxFQFHFUQZC4bX-_00YD3A" target="_blank">两仪生道（整理）. 近三年人形机器人投融资规模季度统计及大事纪要</a></p>
+                    <blockquote>IT桔子和前瞻研究院的统计聚焦于中国人形机器人整机及核心供应链企业，数据截至2025年12月15日。万联证券等机构的统计涵盖更广泛产业链，且包含未披露融资事件的预估。GGII统计（含2025年约380亿元、2023—2025年累计突破580亿元）采用了不同口径。2026年Q1数据差异较大（IT桔子/Q1约200亿元 vs 华源证券/Q1约681亿元），主要因统计范围不同（含/不含零配件企业及供应链融资）及未披露金额的估值处理差异所致。</blockquote>
+                </div>
+            </div>
+
             <div class="flourish-container fade-in fade-in-delay-4">
                 <div class="flourish-embed flourish-scatter" data-src="visualisation/29288013"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/29288013/thumbnail" width="100%" alt="scatter visualization" /></noscript></div>
             </div>
 
-            <div class="illustration-container fade-in fade-in-delay-5">
-                <img src="3.png" class="illustration-svg orange-line-illust" alt="看台上的欢呼——观众与赛道上的机器人">
+            <button class="data-info-btn fade-in fade-in-delay-4" data-target="data-info-card-2">
+                <span class="btn-icon">▼</span>
+                <span>数据说明</span>
+            </button>
+            <div class="data-info-card" id="data-info-card-2">
+                <div class="data-info-content">
+                    <p>1. "66强"来自摩根士丹利研报《Humanoid Horizons: Money Meets Machines》。</p>
+                    <p>2. “初创”指的是因为人形机器人领域而创业的，“跨界”是从智能驾驶、无人机等其他领域跨界进入人形机器人领域，“老牌”是机器人领域到人形机器人领域。与序号一样，仅是为了视觉上区分。</p>
+                </div>
             </div>
 
             <div data-paragraphs="chapter2.paragraphs" class="chapter-paragraphs">
@@ -1562,6 +1667,10 @@
         <div class="container">
             <span class="chapter-number fade-in" data-content="chapter3.number">三、第10公里 · 为什么发令枪一响就要冲刺？</span>
 
+            <div class="illustration-container fade-in fade-in-delay-3">
+                <img src="03.png" class="illustration-svg orange-line-illust" alt="看台上的欢呼">
+            </div>
+
             <div data-paragraphs="chapter3.paragraphs" class="chapter-paragraphs">
                 <p class="fade-in" data-paragraph-index="0">
                     Tiffany是一家人形机器人公司的产品营销负责人，从新能源汽车行业转型而来。她加入时，整个市场团队只有她一个人。
@@ -1583,117 +1692,137 @@
                 </p>
 
                 <div class="visualization-box fade-in">
-
-                    <!-- 图例 -->
-                    <div style="display: flex; gap: 24px; margin-bottom: 24px; font-size: 13px;">
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span class="viz-legend-dot exposure"></span>
-                            <span style="color: var(--ink); font-weight: 400;">曝光事件</span>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span class="viz-legend-dot funding"></span>
-                            <span style="color: var(--orange); font-weight: 400;">融资事件</span>
-                        </div>
+                    <div class="viz-legend-row">
+                        <div class="viz-legend-item"><span class="viz-legend-dot exposure"></span><span class="viz-legend-text" style="color: var(--ink);">曝光事件</span></div>
+                        <div class="viz-legend-item"><span class="viz-legend-dot funding"></span><span class="viz-legend-text" style="color: var(--orange);">融资事件</span></div>
                     </div>
-
-                    <!-- 时间线容器 -->
-                    <div style="position: relative; padding-left: 80px;">
-
-                        <!-- 2025年1月 -->
-                        <div style="position: relative; margin-bottom: 32px;">
-                            <div class="viz-date" style="position: absolute; left: -80px; top: 0; width: 70px;">2025.01</div>
-                            <div style="display: flex; gap: 16px; align-items: stretch;">
-                                <div class="viz-card exposure" style="min-height: 100px;">
-                                    <div style="font-size: 11px; opacity: 0.9; margin-bottom: 6px;">🎬 曝光事件</div>
-                                    <div style="font-size: 14px; font-weight: 600; line-height: 1.5;">宇树科技人形机器人登上央视春晚舞台</div>
-                                    <div style="font-size: 12px; opacity: 0.85; margin-top: 8px; line-height: 1.5;">松延动力等多家企业亮相地方春晚，行业曝光度大幅提升</div>
+                    <div class="viz-timeline-wrap">
+                        <div class="viz-timeline-item">
+                            <div class="viz-date viz-date-label">2025.01</div>
+                            <div class="viz-card-row">
+                                <div class="viz-card exposure">
+                                    <div class="viz-tag">🎬 曝光事件</div>
+                                    <div class="viz-title">宇树科技人形机器人登上央视春晚舞台</div>
+                                    <div class="viz-desc">松延动力等多家企业亮相地方春晚，行业曝光度大幅提升</div>
                                 </div>
-                                <!-- 连接箭头 -->
-                                <div style="display: flex; align-items: center; color: var(--text-muted);">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                                    </svg>
-                                </div>
-                                <!-- 融资事件卡片 -->
-                                <div class="viz-card funding" style="min-height: 100px;">
-                                    <div style="font-size: 11px; opacity: 0.9; margin-bottom: 6px;">💰 融资</div>
-                                    <div style="font-size: 20px; font-weight: 600; color: var(--orange);">107笔</div>
-                                    <div style="font-size: 13px; margin-top: 4px;">融资事件</div>
-                                    <div style="font-size: 18px; font-weight: 600; color: var(--orange); margin-top: 8px;">33.41亿元</div>
-                                    <div style="font-size: 13px;">总融资额</div>
+                                <div class="viz-arrow-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                                <div class="viz-card funding">
+                                    <div class="viz-tag">💰 融资</div>
+                                    <div class="viz-number">107笔</div>
+                                    <div class="viz-unit">融资事件</div>
+                                    <div class="viz-number" style="font-size: 18px; margin-top: 8px;">33.41亿元</div>
+                                    <div class="viz-unit">总融资额</div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- 2025年4月 -->
-                        <div style="position: relative; margin-bottom: 32px;">
-                            <div class="viz-date" style="position: absolute; left: -80px; top: 0; width: 70px;">2025.04</div>
-                            <div style="display: flex; gap: 16px; align-items: stretch;">
-                                <div class="viz-card exposure" style="min-height: 80px;">
-                                    <div style="font-size: 11px; opacity: 0.9; margin-bottom: 6px;">🎬 曝光事件</div>
-                                    <div style="font-size: 14px; font-weight: 600; line-height: 1.5;">北京人形机器人马拉松赛事</div>
-                                    <div style="font-size: 12px; opacity: 0.85; margin-top: 8px; line-height: 1.5;">多家企业参与，引发产业链整体行情进一步引爆</div>
+                        <div class="viz-timeline-item">
+                            <div class="viz-date viz-date-label">2025.04</div>
+                            <div class="viz-card-row">
+                                <div class="viz-card exposure">
+                                    <div class="viz-tag">🎬 曝光事件</div>
+                                    <div class="viz-title">北京人形机器人马拉松赛事</div>
+                                    <div class="viz-desc">多家企业参与，引发产业链整体行情进一步引爆</div>
                                 </div>
-                                <!-- 连接箭头 -->
-                                <div style="display: flex; align-items: center; color: var(--text-muted);">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                                    </svg>
-                                </div>
-                                <!-- 融资统计卡片 -->
-                                <div class="viz-card funding" style="min-height: 80px;">
-                                    <div style="font-size: 11px; opacity: 0.9; margin-bottom: 6px;">💰 2025上半年融资</div>
-                                    <div style="font-size: 20px; font-weight: 600; color: var(--orange);">72次</div>
-                                    <div style="font-size: 13px; margin-top: 4px;">融资事件</div>
-                                    <div style="font-size: 18px; font-weight: 600; color: var(--orange); margin-top: 8px;">超96亿元</div>
-                                    <div style="font-size: 13px;">总金额</div>
+                                <div class="viz-arrow-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                                <div class="viz-card funding">
+                                    <div class="viz-tag">💰 2025上半年融资</div>
+                                    <div class="viz-number">72次</div>
+                                    <div class="viz-unit">融资事件</div>
+                                    <div class="viz-number" style="font-size: 18px; margin-top: 8px;">超96亿元</div>
+                                    <div class="viz-unit">总金额</div>
                                 </div>
                             </div>
                         </div>
-
-                        <!-- 2026年 -->
-                        <div style="position: relative; margin-bottom: 16px;">
-                            <div class="viz-date" style="position: absolute; left: -80px; top: 0; width: 70px;">2026.01</div>
-                            <div style="display: flex; gap: 16px; align-items: stretch;">
-                                <div class="viz-card exposure" style="min-height: 100px;">
-                                    <div style="font-size: 11px; opacity: 0.9; margin-bottom: 6px;">🎬 曝光事件</div>
-                                    <div style="font-size: 14px; font-weight: 600; line-height: 1.5;">央视春晚：4家企业同台竞技</div>
-                                    <div style="font-size: 12px; opacity: 0.85; margin-top: 8px; line-height: 1.5;">宇树科技、松延动力等4家企业登台</div>
-                                    <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--line);">
-                                        <div style="font-size: 11px; opacity: 0.9;">预估赞助成本</div>
-                                        <div style="font-size: 16px; font-weight: 700;">每家近1亿元</div>
+                        <div class="viz-timeline-item">
+                            <div class="viz-date viz-date-label">2026.01</div>
+                            <div class="viz-card-row">
+                                <div class="viz-card exposure">
+                                    <div class="viz-tag">🎬 曝光事件</div>
+                                    <div class="viz-title">央视春晚：4家企业同台竞技</div>
+                                    <div class="viz-desc">宇树科技、松延动力等4家企业登台</div>
+                                    <div class="viz-divider">
+                                        <div class="viz-tag">预估赞助成本</div>
+                                        <div class="viz-emphasis">每家近1亿元</div>
                                     </div>
                                 </div>
-                                <!-- 连接箭头 -->
-                                <div style="display: flex; align-items: center; color: var(--text-muted);">
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M5 12h14M12 5l7 7-7 7"/>
-                                    </svg>
-                                </div>
-                                <!-- 融资事件卡片 -->
-                                <div class="viz-card funding" style="min-height: 100px;">
-                                    <div style="font-size: 11px; opacity: 0.9; margin-bottom: 6px;">💰 大规模融资密集</div>
-                                    <div style="font-size: 13px; font-weight: 500; color: var(--ink); line-height: 1.8;">
-                                        <div style="padding: 4px 8px; background: var(--orange-soft); margin-bottom: 6px;">自变量机器人</div>
-                                        <div style="padding: 4px 8px; background: var(--orange-soft); margin-bottom: 6px;">智平方、千寻智能</div>
-                                        <div style="padding: 4px 8px; background: var(--orange-soft); margin-bottom: 6px;">因时机器人</div>
-                                        <div style="padding: 4px 8px; background: var(--orange-soft);">银河通用</div>
+                                <div class="viz-arrow-wrap"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+                                <div class="viz-card funding">
+                                    <div class="viz-tag">💰 大规模融资密集</div>
+                                    <div class="viz-list">
+                                        <div class="viz-tag-item">自变量机器人</div>
+                                        <div class="viz-tag-item">智平方、千寻智能</div>
+                                        <div class="viz-tag-item">因时机器人</div>
+                                        <div class="viz-tag-item">银河通用</div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
-
-                    <!-- 底部洞察 -->
-                    <div class="viz-note">
-                        <strong>洞察：</strong>曝光事件与融资事件呈现明显的"前后脚"关系——春晚、马拉松等高曝光事件后，融资事件密集发生，形成"曝光→融资"的资本运作闭环。
-                    </div>
+                    <div class="viz-note"><strong>洞察：</strong>曝光事件与融资事件呈现明显的"前后脚"关系——春晚、马拉松等高曝光事件后，融资事件密集发生，形成"曝光→融资"的资本运作闭环。</div>
                 </div>
 
                 <p class="fade-in" data-paragraph-index="6">
                     Anna是另一家机器人公司的品牌公关，加入行业前是科技记者。她曾经也困惑：技术没成熟，为什么急着宣传？走进去之后，她理解了。
                 </p>
+                <div class="flywheel-container fade-in">
+                    <div class="flywheel-title">人形机器人数据飞轮</div>
+                    <div class="flywheel-visual">
+                        <div class="flywheel-center-hub">
+                            <div class="hub-icon">🤖</div>
+                            <div class="hub-title">数据飞轮</div>
+                            <div class="hub-subtitle">Data Flywheel</div>
+                        </div>
+
+                        <div class="flywheel-orbit-ring"></div>
+                        <div class="flywheel-orbit-flow"></div>
+
+                        <div class="flywheel-particle"></div>
+
+                        <div class="flywheel-node flywheel-node-1">
+                            <div class="node-icon">🔬</div>
+                            <div class="node-title">实验室Demo</div>
+                            <div class="node-desc">技术研发与原型验证</div>
+                        </div>
+
+                        <div class="flywheel-node flywheel-node-2">
+                            <div class="node-icon">📢</div>
+                            <div class="node-title">展会曝光</div>
+                            <div class="node-desc">品牌展示与市场认知</div>
+                        </div>
+
+                        <div class="flywheel-node flywheel-node-3">
+                            <div class="node-icon">🤝</div>
+                            <div class="node-title">场景合作</div>
+                            <div class="node-desc">产业对接与场景落地</div>
+                        </div>
+
+                        <div class="flywheel-node flywheel-node-4">
+                            <div class="node-icon">📊</div>
+                            <div class="node-title">数据获取</div>
+                            <div class="node-desc">真实场景数据采集</div>
+                        </div>
+
+                        <div class="flywheel-node flywheel-node-5">
+                            <div class="node-icon">🧠</div>
+                            <div class="node-title">模型训练</div>
+                            <div class="node-desc">AI算法迭代优化</div>
+                        </div>
+
+                        <div class="flywheel-node flywheel-node-6">
+                            <div class="node-icon">🚀</div>
+                            <div class="node-title">更复杂任务</div>
+                            <div class="node-desc">能力升级与任务拓展</div>
+                        </div>
+
+                        <div class="flywheel-step-badge flywheel-step-badge-1">1</div>
+                        <div class="flywheel-step-badge flywheel-step-badge-2">2</div>
+                        <div class="flywheel-step-badge flywheel-step-badge-3">3</div>
+                        <div class="flywheel-step-badge flywheel-step-badge-4">4</div>
+                        <div class="flywheel-step-badge flywheel-step-badge-5">5</div>
+                        <div class="flywheel-step-badge flywheel-step-badge-6">6</div>
+                    </div>
+                </div>
+
                 <p class="fade-in" data-paragraph-index="7">
                     "具身智能最大的问题之一是数据缺口。机器人真正缺的不是实验室里的demo能力，而是真实世界的数据——商超里的人流、光线、货架、顾客行为，只有让机器人真正进场景，才能持续获取。所以你在技术只做到70%的时候就开始宣传、找合作，是为了让数据飞轮转起来：曝光带来合作，合作带来数据，数据推动模型进步，模型进步才能做更难的事。这是这个行业运转的方式。"
                 </p>
@@ -1717,6 +1846,7 @@
     </section>
 
     <section class="section chapter chapter-4" id="chapter4">
+        <div class="chapter-bg"></div>
         <div class="container">
             <span class="chapter-number fade-in" data-content="chapter4.number">四、第21公里 · 赛道究竟有多长</span>
 
@@ -1724,6 +1854,11 @@
                 <p class="fade-in" data-paragraph-index="0">
                     一场马拉松最残酷的地方在于：你以为终点就在前面，其实它远在你看不见的地方。
                 </p>
+
+                <div class="illustration-container fade-in fade-in-delay-3">
+                    <img src="jieti.png" class="illustration-svg orange-line-illust" alt="功能链成熟度阶梯图">
+                </div>
+
                 <p class="fade-in" data-paragraph-index="1">
                     外界看到的，永远是阶梯的第一级：单次能过。
                 </p>
@@ -1742,14 +1877,6 @@
                 <p class="fade-in" data-paragraph-index="6">
                     这道鸿沟，也体现在数据上。钱进来的速度，远远快过机器人"学会走路"的速度。大多数公司在跑，但还没有人接近终点。
                 </p>
-
-                <!-- 数据图表 -->
-                <div class="fade-in" style="margin: 32px 0;">
-                    <div class="flourish-embed flourish-scatter" data-src="visualisation/29279797"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/29279797/thumbnail" width="100%" alt="scatter visualization" /></noscript></div>
-                </div>
-                <div class="fade-in" style="margin: 32px 0;">
-                    <div class="flourish-embed flourish-scatter" data-src="visualisation/29365331"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/29365331/thumbnail" width="100%" alt="scatter visualization" /></noscript></div>
-                </div>
 
                 <p class="fade-in" data-paragraph-index="7">
                     Tiffany用了一个自嘲的说法形容现在的行业："大家做的东西，从外面看都差不多，因为说实话，谁也没真正做出来。现在更像是菜鸡互啄。你没有真正的智能涌现，谈落地、谈量产都是空的。就好像一个小孩还没成年，你不能指望他出来工作。急也没有用——这个行业本来就是十年级别的事情。"
@@ -1779,6 +1906,12 @@
     <section class="section chapter chapter-5" id="chapter5">
         <div class="container">
             <span class="chapter-number fade-in" data-content="chapter5.number">五、第30公里 · 撞墙之后，还在跑的人</span>
+
+            <div class="flourish-container fade-in fade-in-delay-3">
+                <div class="flourish-embed flourish-scatter" data-src="visualisation/29279797"><script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img src="https://public.flourish.studio/visualisation/29279797/thumbnail" width="100%" alt="scatter visualization" /></noscript></div>
+            </div>
+
+
             <div data-paragraphs="chapter5.paragraphs" class="chapter-paragraphs">
                 <p class="fade-in" data-paragraph-index="0">
                     马拉松跑者大多在30公里左右遭遇"撞墙"——身体到达极限，意志开始动摇，这是最多人放弃的地方。
@@ -1832,6 +1965,10 @@
     <section class="section chapter chapter-6" id="chapter6">
         <div class="container">
             <span class="chapter-number fade-in" data-content="chapter6.number">六、终点 · 摔倒，与扶起</span>
+
+            <div class="illustration-container fade-in fade-in-delay-3">
+                <img src="06.png" class="illustration-svg orange-line-illust" alt="终点">
+            </div>
 
             <div data-paragraphs="chapter6.paragraphs" class="chapter-paragraphs">
                 <p class="fade-in" data-paragraph-index="0">
@@ -2041,49 +2178,29 @@
                 }
             });
 
-            reinitializeInteractions();
+            initHighlightInteractions();
         }
 
-        function reinitializeInteractions() {
+        function initHighlightInteractions() {
             const overlay = document.getElementById('overlay');
-            const dataHighlights = document.querySelectorAll('.data-highlight');
-            const quoteTriggers = document.querySelectorAll('.quote-trigger');
-
-            dataHighlights.forEach(trigger => {
-                const newTrigger = trigger.cloneNode(true);
-                trigger.parentNode.replaceChild(newTrigger, trigger);
-            });
-
-            quoteTriggers.forEach(trigger => {
-                const newTrigger = trigger.cloneNode(true);
-                trigger.parentNode.replaceChild(newTrigger, trigger);
-            });
-
+            document.querySelectorAll('.data-highlight').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.quote-trigger').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.data-highlight').forEach(trigger => {
-                trigger.addEventListener('click', function(e) {
+                trigger.addEventListener('click', e => {
                     e.stopPropagation();
-                    const wasActive = this.classList.contains('active');
+                    const wasActive = trigger.classList.contains('active');
                     document.querySelectorAll('.data-highlight').forEach(t => t.classList.remove('active'));
-                    if (!wasActive) {
-                        this.classList.add('active');
-                        overlay.classList.add('active');
-                    } else {
-                        overlay.classList.remove('active');
-                    }
+                    overlay.classList.toggle('active', !wasActive);
+                    if (!wasActive) trigger.classList.add('active');
                 });
             });
-
             document.querySelectorAll('.quote-trigger').forEach(trigger => {
-                trigger.addEventListener('click', function(e) {
+                trigger.addEventListener('click', e => {
                     e.stopPropagation();
-                    const wasActive = this.classList.contains('active');
+                    const wasActive = trigger.classList.contains('active');
                     document.querySelectorAll('.quote-trigger').forEach(t => t.classList.remove('active'));
-                    if (!wasActive) {
-                        this.classList.add('active');
-                        overlay.classList.add('active');
-                    } else {
-                        overlay.classList.remove('active');
-                    }
+                    overlay.classList.toggle('active', !wasActive);
+                    if (!wasActive) trigger.classList.add('active');
                 });
             });
         }
@@ -2148,38 +2265,7 @@
             }, observerOptions);
 
             fadeElements.forEach(el => fadeObserver.observe(el));
-
-            dataHighlights.forEach(trigger => {
-                trigger.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const wasActive = this.classList.contains('active');
-
-                    dataHighlights.forEach(t => t.classList.remove('active'));
-
-                    if (!wasActive) {
-                        this.classList.add('active');
-                        overlay.classList.add('active');
-                    } else {
-                        overlay.classList.remove('active');
-                    }
-                });
-            });
-
-            quoteTriggers.forEach(trigger => {
-                trigger.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const wasActive = this.classList.contains('active');
-
-                    quoteTriggers.forEach(t => t.classList.remove('active'));
-
-                    if (!wasActive) {
-                        this.classList.add('active');
-                        overlay.classList.add('active');
-                    } else {
-                        overlay.classList.remove('active');
-                    }
-                });
-            });
+            initHighlightInteractions();
 
             overlay.addEventListener('click', function() {
                 document.querySelectorAll('.data-highlight').forEach(t => t.classList.remove('active'));
@@ -2261,6 +2347,19 @@
                         stat.innerHTML = (isFloat ? current.toFixed(1) : Math.floor(current)) + '<span style="font-size: 24px;">' + stat.querySelector('span').textContent + '</span>';
                     }, 30);
                 }
+            });
+
+            const dataInfoBtns = document.querySelectorAll('.data-info-btn');
+            dataInfoBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const targetId = this.dataset.target;
+                    const targetCard = document.getElementById(targetId);
+                    
+                    if (targetCard) {
+                        this.classList.toggle('active');
+                        targetCard.classList.toggle('active');
+                    }
+                });
             });
         });
     </script>
